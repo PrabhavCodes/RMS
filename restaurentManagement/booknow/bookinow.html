@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Table Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select {
+            margin-bottom: 15px;
+            padding: 8px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        button.cancel {
+            background-color: red;
+        }
+        .success {
+            color: green;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Your Table</h1>
+        <form id="bookingForm">
+            <label for="people">Number of People:</label>
+            <input type="number" id="people" name="people" required min="1" max="12">
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required 
+                   min="" 
+                   max="">
+            
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required 
+                   min="11:00" 
+                   max="22:00">
+            
+            <label for="table_type">Table Type:</label>
+            <select id="table_type" name="table_type" required>
+                <option value="">Select Table Type</option>
+                <option value="VIP">VIP</option>
+                <option value="Classic">Classic</option>
+                <option value="Normal">Normal</option>
+            </select>
+            
+            <label for="booking_category">Booking Category:</label>
+            <select id="booking_category" name="booking_category" required>
+                <option value="">Select Booking Category</option>
+                <option value="Birthday">Birthday</option>
+                <option value="Anniversary">Anniversary</option>
+                <option value="Meetup">Meetup</option>
+                <option value="Fun">Fun</option>
+                <option value="Other">Other</option>
+            </select>
+            
+            <button type="button" id="submitButton">Book Table</button>
+        </form>
+        <div id="confirmation-message" class="success"></div>
+    </div>
+
+    <script>
+        // Set min and max dates dynamically
+        const today = new Date();
+        const maxDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate());
+        
+        document.getElementById('date').min = today.toISOString().split('T')[0];
+        document.getElementById('date').max = maxDate.toISOString().split('T')[0];
+
+        const form = document.getElementById('bookingForm');
+        const submitButton = document.getElementById('submitButton');
+        const confirmationMessage = document.getElementById('confirmation-message');
+
+        submitButton.addEventListener('click', function(event) {
+            // Get all form elements
+            const people = document.getElementById('people');
+            const date = document.getElementById('date');
+            const time = document.getElementById('time');
+            const tableType = document.getElementById('table_type');
+            const bookingCategory = document.getElementById('booking_category');
+
+            // Reset previous messages
+            confirmationMessage.textContent = '';
+            confirmationMessage.classList.remove('error', 'success');
+
+            // Comprehensive validation
+            const validations = [
+                { element: people, message: 'Please enter number of people (1-12)' },
+                { element: date, message: 'Please select a valid date' },
+                { element: time, message: 'Please select a time between 11:00 AM and 10:00 PM' },
+                { element: tableType, message: 'Please select a table type' },
+                { element: bookingCategory, message: 'Please select a booking category' }
+            ];
+
+            for (let validation of validations) {
+                if (!validation.element.value) {
+                    confirmationMessage.textContent = validation.message;
+                    confirmationMessage.classList.add('error');
+                    return; // Stop execution
+                }
+            }
+
+            // If all validations pass
+            const successMessage = `Your table for ${people.value} people on ${date.value} at ${time.value} has been booked!`;
+            confirmationMessage.textContent = successMessage;
+            confirmationMessage.classList.add('success');
+            
+            // Disable form inputs
+            people.disabled = true;
+            date.disabled = true;
+            time.disabled = true;
+            tableType.disabled = true;
+            bookingCategory.disabled = true;
+
+            // Change button to "Delete Booking"
+            submitButton.textContent = 'Delete Booking';
+            submitButton.classList.add('cancel');
+            
+            // Remove previous click event and add new one for deleting booking
+            submitButton.removeEventListener('click', arguments.callee);
+            submitButton.addEventListener('click', deleteBooking);
+        });
+
+        function deleteBooking() {
+            // Reset form and re-enable inputs
+            form.reset();
+            
+            const people = document.getElementById('people');
+            const date = document.getElementById('date');
+            const time = document.getElementById('time');
+            const tableType = document.getElementById('table_type');
+            const bookingCategory = document.getElementById('booking_category');
+
+            people.disabled = false;
+            date.disabled = false;
+            time.disabled = false;
+            tableType.disabled = false;
+            bookingCategory.disabled = false;
+
+            // Clear confirmation message
+            confirmationMessage.textContent = '';
+            confirmationMessage.classList.remove('error', 'success');
+
+            // Reset button
+            submitButton.textContent = 'Book Table';
+            submitButton.classList.remove('cancel');
+
+            // Remove delete booking event and restore original submit event
+            submitButton.removeEventListener('click', deleteBooking);
+            submitButton.addEventListener('click', arguments.callee);
+        }
+    </script>
+</body>
+</html>

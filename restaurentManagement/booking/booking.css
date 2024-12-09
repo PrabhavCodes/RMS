@@ -1,0 +1,143 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: aliceblue;
+    margin: 0;
+    padding: 20px;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px;
+    background-color:aliceblue;
+    height: 70px; 
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+.navlinks ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem; /* Increase gap for better spacing */
+}
+
+.navlinks li {
+    color: rgb(0, 0, 0);
+}
+
+.auth {
+    display: flex;
+    gap: 1rem; 
+}
+ul a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+.navlinks a:hover,
+button a:hover {
+    color: #161616;
+}
+
+
+/* Grid layout */
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Card styling */
+.card {
+    display: flex;
+    align-items: flex-start;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image styling */
+.card img {
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Card content */
+.card-details {
+    padding: 15px;
+    flex: 1;
+}
+
+.card-details h3 {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.card-details p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Button styling */
+.card button {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 15px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 50px 10px 5px 0;
+    font-size: 14px;
+}
+
+.card button:hover {
+    background-color: #0056b3;
+}
+
+/* Seats button for distinction */
+.seats-button {
+    background-color: #28a745;
+}
+
+.seats-button:hover {
+    background-color: #1c7c32;
+}
+.pagination {
+    display: flex;
+    justify-content: space-between;
+
+}
+.pagination button {
+    padding: 15px;
+    background-color: #000000;
+    color: white;
+    border: rgb(255, 255, 255);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.pagination .prev {
+    margin-left: 18px;
+}
+.pagination .next {
+    margin-right: 18px;
+}
+a {
+    text-decoration: none;
+    color: white;
+}

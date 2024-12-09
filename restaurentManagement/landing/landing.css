@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body {
+    background-color: aliceblue;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color:aliceblue;
+    height: 70px; 
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+.navlinks ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem; /* Increase gap for better spacing */
+}
+
+.navlinks li {
+    color: rgb(0, 0, 0);
+}
+
+.auth {
+    display: flex;
+    gap: 1rem; 
+}
+ul a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+.navlinks a:hover,
+button a:hover {
+    color: #161616;
+}
+
+.heroSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; 
+    margin-top: 50px;
+}
+
+.heroSection h1 {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.heroSection p {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+
+
+.heroSection button {
+    padding: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    border: none;
+}
+.heroSection button:hover{
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.Bt1 {
+    margin-right: 30px;
+}
+
+/*this is section2*/
+.Section2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    padding-top: 40px;
+    padding-bottom: 50px;
+}
+
+.Section2 h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+}
+
+.cardSection {
+    display: flex;
+    gap: 20px; /* Space between each card */
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s; /* Adds hover effect */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Style for the rating to make it stand out */
+.card .rating {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #666;
+    background-color: #f4f4f4; /* Light background to stand out */
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.card button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.card button:hover {
+    background-color: #333;
+}
+/* Footer Styles */
+.footer {
+    background-color: aliceblue;
+    color: #000000;
+    padding: 40px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.footerDetails, .footerSocial {
+    margin: 20px;
+    flex: 1 1 300px;
+}
+
+.footer h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+.footerDetails p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Auth Buttons */
+.authButtons {
+    display: flex;
+    gap: 15px;
+}
+
+.authButtons a {
+    padding: 18px 50px;
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+}
+
+.authButtons a:hover {
+    background-color: #444444;
+    transform: translateY(-2px);
+}
+
+/* Social Media Icons */
+.footerSocial .socialIcons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.footerSocial .socialIcons img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.footerSocial .socialIcons img:hover {
+    transform: scale(1.15);
+    filter: brightness(1.2);
+}
+
+/* Footer Bottom Section */
+.footerBottom {
+    border-top: 1px solid #dddddd;
+    padding: 20px;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #888888;
+}
