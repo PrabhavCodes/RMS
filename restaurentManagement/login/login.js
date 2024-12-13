@@ -15,6 +15,7 @@ form.addEventListener("submit", (event) => {
         alert("Please fill out both fields");
         return;
     }
+    window.location.href = "../landing/landing.html";
 
     // Log the values (or handle them as needed)
     console.log("Username:", username);

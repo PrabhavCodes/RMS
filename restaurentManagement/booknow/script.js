@@ -1,28 +1,27 @@
 const today = new Date();
 const maxDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate());
-
 document.getElementById('date').min = today.toISOString().split('T')[0];
 document.getElementById('date').max = maxDate.toISOString().split('T')[0];
 
-const form = document.getElementById('bookingForm');
 const bookingForm = document.getElementById('bookingForm');
 const confirmationMessage = document.getElementById('confirmation-message');
+const deleteSection = document.getElementById('delete-section');
+const deleteBookingBtn = document.getElementById('deleteBookingBtn');
+
+let currentBookingId = null; 
 
 bookingForm.addEventListener('submit', async function (event) {
-    // Get all form elements
     event.preventDefault();
     const people = document.getElementById('people').value;
     const date = document.getElementById('date').value;
     const time = document.getElementById('time').value;
     const tableType = document.getElementById('table_type').value;
     const bookingCategory = document.getElementById('booking_category').value;
-
+   
     // Reset previous messages
     confirmationMessage.textContent = '';
     confirmationMessage.classList.remove('error', 'success');
-
    
-
     try {
         const response = await fetch("http://localhost:3000/api/rest", {
             method: 'POST',
@@ -37,64 +36,81 @@ bookingForm.addEventListener('submit', async function (event) {
                 booking_category: bookingCategory
             })
         });
-
         const responseData = await response.json();
         console.log(responseData);
-
+        
         if (responseData.ok) {
+            currentBookingId = responseData.booking._id;
+
             alert("Booking Confirmed");
-            form.reset();
-            window.location.href = "../landing/landing.html";
+            
+            // Show the delete section
+            deleteSection.style.display = 'block';
+
+            // Success message and form handling
+            const successMessage = `Your table for ${people} people on ${date} at ${time} has been booked!`;
+            confirmationMessage.textContent = successMessage;
+            confirmationMessage.classList.add('success');
+            
+            // Disable form inputs
+            document.getElementById('people').disabled = true;
+            document.getElementById('date').disabled = true;
+            document.getElementById('time').disabled = true;
+            document.getElementById('table_type').disabled = true;
+            document.getElementById('booking_category').disabled = true;
         } else {
-            alert(`${responseData.message}` || "failed to get booking");
+            alert(responseData.message || "Failed to get booking");
         }
     } catch (e) {
-        console.log("Error unable to book");
+        console.error("Error unable to book", e);
+        confirmationMessage.textContent = "Unable to book. Please try again.";
+        confirmationMessage.classList.add('error');
     }
-
-    // If all validations pass
-    const successMessage = `Your table for ${people.value} people on ${date.value} at ${time.value} has been booked!`;
-    confirmationMessage.textContent = successMessage;
-    confirmationMessage.classList.add('success');
-
-    // Disable form inputs
-    people.disabled = true;
-    date.disabled = true;
-    time.disabled = true;
-    tableType.disabled = true;
-    bookingCategory.disabled = true;
-
-    // Change button to "Delete Booking"
-    bookingForm.textContent = 'Delete Booking';
-    bookingForm.classList.add('cancel');
-
-    // Remove previous click event and add new one for deleting booking
-    bookingForm.removeEventListener('click', arguments.callee);
-    bookingForm.addEventListener('click', deleteBooking);
 });
 
-function deleteBooking() {
-    // Reset form and re-enable inputs
-    form.reset();
+deleteBookingBtn.addEventListener('click', async function() {
+    if (!currentBookingId) {
+        alert('No booking to delete');
+        return;
+    }
 
-    const people = document.getElementById('people');
-    const date = document.getElementById('date');
-    const time = document.getElementById('time');
-    const tableType = document.getElementById('table_type');
-    const bookingCategory = document.getElementById('booking_category');
+    try {
+        const response = await fetch(`http://localhost:3000/api/rest/${currentBookingId}`, {
+            method: 'DELETE'
+        });
 
-    people.disabled = false;
-    date.disabled = false;
-    time.disabled = false;
-    tableType.disabled = false;
-    bookingCategory.disabled = false;
+        const responseData = await response.json();
 
-    confirmationMessage.textContent = '';
-    confirmationMessage.classList.remove('error', 'success');
+        if (responseData.ok) {
+            alert('Booking deleted successfully');
+            
+            // Reset the form
+            bookingForm.reset();
+            
+            // Re-enable form inputs
+            const inputs = [
+                'people', 'date', 'time', 'table_type', 'booking_category'
+            ];
+            
+            inputs.forEach(id => {
+                const input = document.getElementById(id);
+                input.disabled = false;
+            });
 
-    bookingForm.textContent = 'Book Table';
-    bookingForm.classList.remove('cancel');
+            // Hide delete section and show booking form
+            deleteSection.style.display = 'none';
 
-    bookingForm.removeEventListener('click', deleteBooking);
-    bookingForm.addEventListener('click', arguments.callee);
-}
+            // Clear confirmation message
+            confirmationMessage.textContent = '';
+            confirmationMessage.classList.remove('error', 'success');
+
+            // Reset booking ID
+            currentBookingId = null;
+        } else {
+            alert(responseData.message || 'Failed to delete booking');
+        }
+    } catch (e) {
+        console.error('Error deleting booking', e);
+        alert('Unable to delete booking. Please try again.');
+    }
+});

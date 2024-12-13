@@ -90,3 +90,23 @@ button:hover {
         font-size: 14px;
     }
 }
+
+
+#delete-section {
+    margin-top: 15px;
+    text-align: center;
+    display: hidden !important;
+}
+
+#deleteBookingBtn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.visible {
+    display: block !important;
+}

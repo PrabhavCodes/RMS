@@ -108,15 +108,15 @@
     <div class="logo">RMS</div>
     <div class="navlinks">
         <ul>
-            <li><a href="./landing.html">Home</a></li>
-            <li><a href="./booking/booking.html">Booking</a></li>
-            <li><a href="/">Contact Us</a></li>
+            <li><a href="../landing/landing.html">Home</a></li>
+            <li><a href="../booking/booking.html">Booking</a></li>
+            <li><a href="./contact.html">Contact Us</a></li>
         </ul>
     </div>
   </div>
 
   <div class="container">
-    <form class="contact-form">
+    <form class="contact-form" onsubmit="Alert()">
       <h2>We'd love to hear from you!</h2>
       <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -127,11 +127,16 @@
       <label for="message">Message</label>
       <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
       
-      <button type="submit">Submit</button>
+      <button >Submit</button>
     </form>
   </div>
   <footer>
     &copy; 2024 RMS. All Rights Reserved.
   </footer>
+  <script>
+    function Alert() {
+      alert("Your feedback has been accepted!");
+    }
+  </script>
 </body>
 </html>

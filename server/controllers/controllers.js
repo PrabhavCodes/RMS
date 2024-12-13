@@ -22,7 +22,7 @@ const addUser = async (req, res) => {
       password: req.body.password,
     });
 
-    await newUser.save(y);
+    await newUser.save();
     console.log('User added successfully');
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (err) {
@@ -52,4 +52,32 @@ const createBooking = async (req, res) => {
   }
 };
 
-module.exports = { addUser, mongoConnect,createBooking };
+const deleteBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find and delete the booking
+    const deletedBooking = await Booking.findByIdAndDelete(id);
+
+    if (!deletedBooking) {
+      return res.status(404).json({
+        ok: false,
+        message: 'Booking not found'
+      });
+    }
+
+    res.status(200).json({
+      ok: true,
+      message: 'Booking deleted successfully',
+      booking: deletedBooking
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      ok: false,
+      message: 'Error deleting booking'
+    });
+  }
+};
+
+module.exports = { addUser, mongoConnect,createBooking,deleteBooking };
