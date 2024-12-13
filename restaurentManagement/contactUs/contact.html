@@ -10,24 +10,55 @@
       background-color: #f4f4f4;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
+    .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color:#f4f4f4;
+    height: 70px; 
+}
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+    }
+
+    .navlinks ul {
+        list-style: none;
+        display: flex;
+        gap: 1.5rem; /* Increase gap for better spacing */
+    }
+
+    .navlinks li {
+        color: rgb(0, 0, 0);
+    }
+    .auth {
+        display: flex;
+        gap: 1rem; 
+    }
+    ul a {
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        font-size: 20px;
+    }
+    .navlinks a:hover,
+    button a:hover {
+        color: #161616;
+    }
+
     .container {
       width: 80%;
       margin: auto;
       overflow: hidden;
+      flex: 1; /* Pushes the footer to the bottom */
     }
-    header {
-      background: #007bff;
-      color: #fff;
-      padding-top: 30px;
-      min-height: 70px;
-      border-bottom: #ccc 3px solid;
-    }
-    header h1 {
-      text-align: center;
-      margin: 0;
-      font-size: 24px;
-    }
+    
     .contact-form {
       background: #fff;
       padding: 20px;
@@ -54,7 +85,7 @@
       border-radius: 5px;
     }
     .contact-form button {
-      background: #007bff;
+      background: #000000;
       color: #fff;
       padding: 10px 20px;
       border: none;
@@ -66,17 +97,24 @@
     }
     footer {
       text-align: center;
-      margin-top: 20px;
       padding: 10px 0;
-      background: #007bff;
+      background: #000000;
       color: #fff;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Contact Us</h1>
-  </header>
+  <div class="nav">
+    <div class="logo">RMS</div>
+    <div class="navlinks">
+        <ul>
+            <li><a href="./landing.html">Home</a></li>
+            <li><a href="./booking/booking.html">Booking</a></li>
+            <li><a href="/">Contact Us</a></li>
+        </ul>
+    </div>
+  </div>
+
   <div class="container">
     <form class="contact-form">
       <h2>We'd love to hear from you!</h2>

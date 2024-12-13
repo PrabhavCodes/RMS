@@ -7,16 +7,21 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
         }
         .container {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px; /* Limit the container's width */
         }
         form {
             display: flex;
@@ -30,7 +35,8 @@
             padding: 8px;
         }
         button {
-            background-color: #4CAF50;
+            background-color: #000000;
+            border-radius: 5px;
             color: white;
             border: none;
             padding: 10px;
@@ -85,101 +91,13 @@
                 <option value="Other">Other</option>
             </select>
             
-            <button type="button" id="submitButton">Book Table</button>
+            <button type="submit" id="submitButton">Book Table</button>
         </form>
         <div id="confirmation-message" class="success"></div>
     </div>
 
-    <script>
-        // Set min and max dates dynamically
-        const today = new Date();
-        const maxDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate());
+    <script src="script.js" type="module">
         
-        document.getElementById('date').min = today.toISOString().split('T')[0];
-        document.getElementById('date').max = maxDate.toISOString().split('T')[0];
-
-        const form = document.getElementById('bookingForm');
-        const submitButton = document.getElementById('submitButton');
-        const confirmationMessage = document.getElementById('confirmation-message');
-
-        submitButton.addEventListener('click', function(event) {
-            // Get all form elements
-            const people = document.getElementById('people');
-            const date = document.getElementById('date');
-            const time = document.getElementById('time');
-            const tableType = document.getElementById('table_type');
-            const bookingCategory = document.getElementById('booking_category');
-
-            // Reset previous messages
-            confirmationMessage.textContent = '';
-            confirmationMessage.classList.remove('error', 'success');
-
-            // Comprehensive validation
-            const validations = [
-                { element: people, message: 'Please enter number of people (1-12)' },
-                { element: date, message: 'Please select a valid date' },
-                { element: time, message: 'Please select a time between 11:00 AM and 10:00 PM' },
-                { element: tableType, message: 'Please select a table type' },
-                { element: bookingCategory, message: 'Please select a booking category' }
-            ];
-
-            for (let validation of validations) {
-                if (!validation.element.value) {
-                    confirmationMessage.textContent = validation.message;
-                    confirmationMessage.classList.add('error');
-                    return; // Stop execution
-                }
-            }
-
-            // If all validations pass
-            const successMessage = `Your table for ${people.value} people on ${date.value} at ${time.value} has been booked!`;
-            confirmationMessage.textContent = successMessage;
-            confirmationMessage.classList.add('success');
-            
-            // Disable form inputs
-            people.disabled = true;
-            date.disabled = true;
-            time.disabled = true;
-            tableType.disabled = true;
-            bookingCategory.disabled = true;
-
-            // Change button to "Delete Booking"
-            submitButton.textContent = 'Delete Booking';
-            submitButton.classList.add('cancel');
-            
-            // Remove previous click event and add new one for deleting booking
-            submitButton.removeEventListener('click', arguments.callee);
-            submitButton.addEventListener('click', deleteBooking);
-        });
-
-        function deleteBooking() {
-            // Reset form and re-enable inputs
-            form.reset();
-            
-            const people = document.getElementById('people');
-            const date = document.getElementById('date');
-            const time = document.getElementById('time');
-            const tableType = document.getElementById('table_type');
-            const bookingCategory = document.getElementById('booking_category');
-
-            people.disabled = false;
-            date.disabled = false;
-            time.disabled = false;
-            tableType.disabled = false;
-            bookingCategory.disabled = false;
-
-            // Clear confirmation message
-            confirmationMessage.textContent = '';
-            confirmationMessage.classList.remove('error', 'success');
-
-            // Reset button
-            submitButton.textContent = 'Book Table';
-            submitButton.classList.remove('cancel');
-
-            // Remove delete booking event and restore original submit event
-            submitButton.removeEventListener('click', deleteBooking);
-            submitButton.addEventListener('click', arguments.callee);
-        }
     </script>
 </body>
 </html>

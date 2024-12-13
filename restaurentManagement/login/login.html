@@ -6,14 +6,11 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="login.css">
 </head>
-
 <body>
-    
-    
     <div class="login-container">
         <div class="login-card">
             <h2>Login</h2>
-            <form action="your-login-endpoint" method="post">
+            <form id="login-form">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
                 
@@ -23,6 +20,7 @@
                 <button type="submit">Login</button>
             </form>
         </div>
+        <script src="./login.js" type="module"></script>
     </div>
 </body>
 </html>
