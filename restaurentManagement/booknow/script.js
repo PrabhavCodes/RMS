@@ -5,7 +5,7 @@ document.getElementById('date').max = maxDate.toISOString().split('T')[0];
 
 const bookingForm = document.getElementById('bookingForm');
 const confirmationMessage = document.getElementById('confirmation-message');
-const deleteSection = document.getElementById('delete-section');
+// const deleteSection = document.getElementById('delete-section');
 const deleteBookingBtn = document.getElementById('deleteBookingBtn');
 
 let currentBookingId = null; 
@@ -45,7 +45,7 @@ bookingForm.addEventListener('submit', async function (event) {
             alert("Booking Confirmed");
             
             // Show the delete section
-            deleteSection.style.display = 'block';
+            deleteBookingBtn.classList.toggle('hidden')
 
             // Success message and form handling
             const successMessage = `Your table for ${people} people on ${date} at ${time} has been booked!`;

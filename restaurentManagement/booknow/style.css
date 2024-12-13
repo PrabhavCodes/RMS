@@ -91,13 +91,6 @@ button:hover {
     }
 }
 
-
-#delete-section {
-    margin-top: 15px;
-    text-align: center;
-    display: hidden !important;
-}
-
 #deleteBookingBtn {
     background-color: red;
     color: white;
@@ -107,6 +100,6 @@ button:hover {
     cursor: pointer;
 }
 
-.visible {
-    display: block !important;
+.hidden {
+    display: none !important;
 }
